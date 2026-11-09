@@ -1,5 +1,9 @@
 # 송상헌 웹 이력서 (web-resume-songsh)
 
+- 공개 주소: https://web-resume-bice.vercel.app/ko · https://web-resume-bice.vercel.app/en
+- GitHub: https://github.com/songsh2066-sh/web-resume
+- Vercel 프로젝트: https://vercel.com/song-eac7/web-resume
+
 Next.js(App Router)로 만든 공개 이력서 사이트입니다. `/ko`, `/en` 두 언어로 제공되며, 데이터 파일만 고치면 페이지가 바뀝니다. PRD v2.0의 공개 페이지 요구사항(P-01~P-06, P-09) 중 정적 사이트로 가능한 범위를 구현했습니다. 관리자 콘솔·경력 원장·AI 생성은 Supabase 연결 후 다음 단계에서 올립니다.
 
 ## 폴더 구조
@@ -75,6 +79,10 @@ data/ui.ts                화면 문구(한/영)
 | `vercel --prod` | 실제 서비스(production) 주소로 배포합니다. |
 
 ## 5. 프로젝트를 추가한 뒤 다시 배포하기
+
+이 저장소는 이미 GitHub(songsh2066-sh/web-resume)과 Vercel에 연결되어 있습니다. 로컬 작업 폴더에서 아래 순서로 올리면 됩니다. (처음 한 번 `git clone https://github.com/songsh2066-sh/web-resume.git` 으로 받아 두세요. 한글 설명: GitHub의 저장소를 내 컴퓨터로 복사합니다.)
+
+> GitHub push 후 Vercel이 자동으로 배포되지 않으면, Vercel → Settings → Git → Deploy Hooks의 `manual-redeploy` URL을 브라우저에서 한 번 열면 main 브랜치가 다시 배포됩니다.
 
 | 명령어 | 한글 설명 |
 | --- | --- |
