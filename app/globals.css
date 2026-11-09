@@ -1,0 +1,117 @@
+/* 디자인 토큰 — 관리자 테마 편집(PRD A-20~A-24)은 이 변수들을 바꾸는 방식으로 확장합니다. */
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --fg: #1c2130;
+  --muted: #5f6577;
+  --line: #dddbd3;
+  --primary: #24376a;
+  --accent: #b1533a;
+  --primary-soft: #e8ecf5;
+  --font-ko: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-en: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radius: 14px;
+  --gap: 28px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161c; --surface: #1c1f28; --fg: #e9e9ee; --muted: #a2a6b4; --line: #30343f;
+    --primary: #a3b5e6; --accent: #e59a7f; --primary-soft: #262d40; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14161c; --surface: #1c1f28; --fg: #e9e9ee; --muted: #a2a6b4; --line: #30343f;
+  --primary: #a3b5e6; --accent: #e59a7f; --primary-soft: #262d40; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-ko); font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+html[lang="en"] body { font-family: var(--font-en), var(--font-ko); }
+a { color: var(--primary); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 상단 바 */
+.topbar { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.topbar .in {
+  max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left));
+}
+.brand { font-weight: 600; text-decoration: none; color: var(--fg); display: inline-flex; align-items: center; gap: 8px; }
+.brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+.spacer { flex: 1; }
+.btn {
+  border: 1px solid var(--line); background: var(--surface); color: inherit; border-radius: 8px;
+  padding: 6px 12px; font: inherit; font-size: 14px; text-decoration: none; cursor: pointer; line-height: 1.2;
+}
+.btn:hover { border-color: var(--primary); }
+.btn[aria-current="page"] { background: var(--primary); color: #fff; border-color: var(--primary); }
+.langs { display: inline-flex; gap: 6px; }
+
+/* 안내 */
+.notice {
+  max-width: 900px; margin: 16px auto 0; padding: 8px 12px; border-radius: 8px; font-size: 13.5px;
+  background: var(--primary-soft); color: var(--fg); border: 1px solid var(--line);
+}
+
+/* 이력서 본문 */
+.page { padding: 20px max(16px, env(safe-area-inset-right)) 56px max(16px, env(safe-area-inset-left)); }
+.resume {
+  max-width: 900px; margin: 16px auto 0; background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: clamp(20px, 4vw, 44px);
+  box-shadow: 0 1px 2px rgba(28,33,48,.05), 0 8px 24px rgba(28,33,48,.06);
+}
+.head { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: var(--gap); }
+.photo { width: 112px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); flex: none; }
+.who { flex: 1; min-width: 220px; }
+.name { font-size: 2em; font-weight: 700; line-height: 1.15; color: var(--primary); }
+.name small { font-size: .5em; font-weight: 500; color: var(--muted); margin-left: .5em; letter-spacing: .03em; }
+.headline { font-size: 1.1em; font-weight: 500; margin-top: 6px; color: var(--accent); }
+.contact { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 12px; font-size: .92em; color: var(--muted); }
+.contact a { color: inherit; }
+.contact span b { font-weight: 500; color: var(--fg); }
+.links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; font-size: .92em; }
+
+.body { display: grid; gap: var(--gap); }
+section h2 {
+  font-size: .86em; letter-spacing: .14em; text-transform: uppercase; color: var(--primary);
+  border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 12px; font-weight: 700;
+}
+.summary { white-space: pre-line; font-size: 1.02em; }
+.item { display: grid; gap: 3px; margin-bottom: 14px; }
+.item:last-child { margin-bottom: 0; }
+.t { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.t b { font-size: 1.04em; }
+.when { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: .85em; color: var(--muted); white-space: nowrap; }
+.sub { color: var(--muted); font-size: .94em; }
+.item ul { margin: 4px 0 0; padding-left: 1.2em; }
+.item li { margin: 2px 0; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag { font-size: .82em; padding: 2px 9px; border-radius: 999px; background: var(--primary-soft); color: var(--primary); }
+.skillrow { display: grid; grid-template-columns: minmax(100px, auto) 1fr; gap: 4px 12px; margin-bottom: 8px; font-size: .96em; }
+.skillrow .k { color: var(--muted); font-weight: 500; }
+.fb { font-size: .74em; color: var(--muted); border: 1px dashed var(--line); border-radius: 6px; padding: 0 5px; margin-left: 6px; vertical-align: middle; white-space: nowrap; }
+.foot { max-width: 900px; margin: 16px auto 0; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 480px) { .skillrow { grid-template-columns: 1fr; } .name { font-size: 1.6em; } }
+
+/* 인쇄 = PDF 저장 (PRD P-04) */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff; color: #000; font-size: 11.5pt; }
+  .topbar, .notice, .foot, .fb, .noprint { display: none !important; }
+  .page { padding: 0; }
+  .resume { box-shadow: none; border: 0; border-radius: 0; max-width: none; padding: 0; margin: 0; background: #fff; }
+  .name, section h2 { color: #000; }
+  .headline { color: #333; }
+  .tag { border: 1px solid #999; background: none; color: #000; }
+  a { color: inherit; text-decoration: none; }
+  section { break-inside: avoid; }
+}
