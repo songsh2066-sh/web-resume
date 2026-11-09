@@ -16,8 +16,8 @@ export const resume: Resume = {
       en: "AI Developer · Software Developer",
     },
     summary: {
-      ko: "한림대학교 소프트웨어학부에서 빅데이터·데이터사이언스를 전공했습니다. 정보처리기사 자격을 보유하고 있으며, 현재 청년취업사관학교 AI Agent 과정에서 LLM 기반 에이전트 프로젝트를 수행하고 있습니다. 데이터 처리부터 AI 서비스 구현·배포까지 직접 만드는 개발자를 지향합니다.",
-      en: "Studied Big Data and Data Science in the School of Software at Hallym University. Holds the Engineer Information Processing certification and is currently building LLM-based agent projects in the Youth Employment Academy AI Agent program. Aims to be a developer who delivers end to end, from data processing to AI service implementation and deployment.",
+      ko: "정보처리기사 자격을 보유하고 있으며, 현재 청년취업사관학교 AI Agent 과정에서 LLM 기반 에이전트 프로젝트를 수행하고 있습니다. 데이터 처리부터 AI 서비스 구현·배포까지 직접 만드는 개발자를 지향합니다.",
+      en: "Holds the Engineer Information Processing certification and is currently building LLM-based agent projects in the Youth Employment Academy AI Agent program. Aims to be a developer who delivers end to end, from data processing to AI service implementation and deployment.",
     },
     email: "songsh0529@gmail.com",
     phone: "+82-10-2724-6130",
@@ -51,15 +51,12 @@ export const resume: Resume = {
   ],
 
   education: [
-    {
-      school: { ko: "한림대학교", en: "Hallym University" },
-      degree: {
-        ko: "소프트웨어학부 빅데이터전공 / 데이터사이언스전공",
-        en: "School of Software, Big Data Major / Data Science Major",
-      },
-      period: "", // 입력 필요: 예 "2019.03 – 2025.02"
-      // gpa: "3.8/4.5",
-    },
+    // 대학교 학력은 샘플 공개 중에는 숨깁니다. 공개하려면 아래 주석을 해제하세요.
+    // {
+    //   school: { ko: "한림대학교", en: "Hallym University" },
+    //   degree: { ko: "소프트웨어학부 빅데이터전공 / 데이터사이언스전공", en: "School of Software, Big Data Major / Data Science Major" },
+    //   period: "", // 예 "2019.03 – 2025.02"
+    // },
     {
       school: { ko: "청년취업사관학교", en: "Youth Employment Academy (Seoul)" },
       degree: { ko: "AI Agent 개발 과정", en: "AI Agent Development Program" },
