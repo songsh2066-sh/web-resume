@@ -49,6 +49,49 @@ export const projects: Project[] = [
     ],
     links: [],
     visible: true,
+    slug: "erlink",
+    title: { ko: "ERLink AI", en: "ERLink AI" },
+    status: "building",
+    summary: {
+      ko: "119 신고부터 병원 선정·승인까지, 근거가 붙은 병원 후보 3곳을 제시하는 응급이송 의사결정 지원 멀티 에이전트",
+      en: "A multi-agent system for emergency transport that goes from a 119 call to an approved hospital, proposing three evidence-backed options",
+    },
+    problem: {
+      ko: "가까운 병원에 병상이 없거나, 병상이 있어도 필요한 처치를 못 하면 재이송이 생깁니다. 구급대원은 짧은 시간 안에 이송 시간·치료 역량·수용 여력·지침을 함께 따져야 합니다. ERLink는 진단하지 않고, 판단에 필요한 근거와 후보를 정리해 구급대원의 결정을 돕습니다.",
+      en: "If the nearest hospital has no bed, or has a bed but cannot provide the needed care, the patient must be moved again. Paramedics have to weigh transport time, capability, capacity, and protocol in minutes. ERLink does not diagnose; it gathers the evidence and options so the paramedic can decide.",
+    },
+    flow: [
+      { ko: "신고 텍스트 (개인정보 가림)", en: "119 call text (PII masked)" },
+      { ko: "중증도 판정 Agent", en: "Triage agent" },
+      { ko: "병상 · 역량 · 이송 시간 · 근거(RAG) Agent", en: "Bed · capability · route · evidence (RAG) agents" },
+      { ko: "Supervisor가 후보 3곳 선정", en: "Supervisor ranks 3 hospitals" },
+      { ko: "Critic이 근거·모순 검사", en: "Critic checks evidence and conflicts" },
+      { ko: "구급대원 승인 · 감사 기록", en: "Paramedic approval · audit log" },
+    ],
+    deltas: [
+      {
+        label: { ko: "근거 검색 정확도 (MRR)", en: "Evidence retrieval (MRR)" },
+        before: 0.705, after: 0.884, better: "up", max: 1,
+        source: { ko: "평가셋 50문항", en: "50-question eval set" },
+      },
+      {
+        label: { ko: "중증 환자 과소평가 비율", en: "Under-triage rate" },
+        before: 66.7, after: 19.3, unit: "%", better: "down", max: 100,
+        source: { ko: "AI Hub 119 신고 평가용 30%", en: "AI Hub 119 calls, 30% test split" },
+      },
+      {
+        label: { ko: "중증('상') 재현율", en: "Severe-class recall" },
+        before: 0.28, after: 0.48, better: "up", max: 1,
+        source: { ko: "AI Hub 119 신고 평가용 30%", en: "AI Hub 119 calls, 30% test split" },
+      },
+      {
+        label: { ko: "도로망 밖 이송 시간 추정 오차", en: "Off-network ETA error" },
+        before: 8.1, after: 3.8, unit: "분", better: "down", max: 10,
+        source: { ko: "서울 OSM 도로망 비교", en: "vs. Seoul OSM road routing" },
+      },
+    ],
+    featuredTech: ["LangGraph", "FastAPI", "pgvector", "Next.js", "Docker"],
+    privateRepo: true,
   },
   {
     id: "p002",
@@ -80,6 +123,32 @@ export const projects: Project[] = [
     ],
     links: [{ label: "Live demo", url: "https://seoulmate-six.vercel.app" }],
     visible: true,
+    slug: "seoulmate",
+    title: { ko: "서울 메이트", en: "Seoul Mate" },
+    status: "live",
+    summary: {
+      ko: "날씨·혼잡도·운영시간을 도구로 직접 확인하고, 가볼 곳과 먹을 곳을 한 코스로 짜 주는 서울 나들이 AI 에이전트",
+      en: "A Seoul outing agent that checks weather, crowds, and opening hours with tools, then plans places to visit and eat in one route",
+    },
+    problem: {
+      ko: "\"오늘 서울 어디 갈까?\"에 모델이 기억으로 답하면 문 닫은 곳이나 지금 붐비는 곳을 추천하게 됩니다. 지금 이 순간의 데이터를 확인한 뒤에만 답하도록 만들었습니다.",
+      en: "If a model answers \"Where should I go in Seoul today?\" from memory, it suggests places that are closed or crowded right now. This agent answers only after checking live data.",
+    },
+    flow: [
+      { ko: "질문", en: "Question" },
+      { ko: "에이전트 루프 (Claude · OpenAI)", en: "Agent loop (Claude · OpenAI)" },
+      { ko: "도구 6종: 날씨 · 혼잡 · 예측 · 장소 · 운영시간 · 관광지", en: "6 tools: weather · crowd · forecast · places · hours · spots" },
+      { ko: "서버가 장소 목록으로 코스 검증", en: "Server validates the route against the catalog" },
+      { ko: "혼잡 지도 · 코스 카드", en: "Crowd map · route cards" },
+    ],
+    facts: [
+      { value: "121", label: { ko: "실시간 연동 장소", en: "live areas connected" }, source: { ko: "서울 열린데이터 citydata", en: "Seoul Open Data citydata" } },
+      { value: "83", label: { ko: "pytest 테스트", en: "pytest tests" }, source: { ko: "실제 API 통합 테스트 포함", en: "incl. live API integration" } },
+      { value: "4/5", label: { ko: "검수 시나리오 6개 전체 통과", en: "runs passing all 6 eval scenarios" }, source: { ko: "실제 모델 반복 실행", en: "repeated live-model runs" } },
+    ],
+    featuredTech: ["Python", "FastAPI", "Claude API", "Apps Script", "Vercel"],
+    image: { src: "/projects/seoulmate.webp", alt: { ko: "서울 메이트 첫 화면: 실시간 먹자골목 혼잡도와 코스 추천 버튼", en: "Seoul Mate home: live crowd levels and a route button" }, width: 890, height: 556 },
+    privateRepo: true,
   },
   {
     id: "p001",
@@ -103,6 +172,30 @@ export const projects: Project[] = [
     ],
     links: [{ label: "Web app", url: "https://script.google.com/macros/s/AKfycbxQjsRZW1-UDQfN7ywW4rqMgDL-blAU6RKvAYGjGwj2rLLNMfTSRPapeKHV_gZEnhI9/exec" }],
     visible: true,
+    slug: "memory-detective",
+    title: { ko: "기억 탐정 AI", en: "Memory Detective AI" },
+    status: "live",
+    summary: {
+      ko: "기억나는 장면과 힌트 카드만으로 영화·애니메이션 후보를 근거와 함께 찾아 주는 AI",
+      en: "An AI that finds candidate movies and anime from a remembered scene and a few hint cards, with reasons",
+    },
+    problem: {
+      ko: "제목은 기억나지 않고 장면만 떠오를 때는 검색어를 만들기 어렵습니다. 흐릿한 기억을 단서로 정리하고, 왜 그 작품인지 근거와 함께 보여 주도록 만들었습니다.",
+      en: "When you remember a scene but not the title, it is hard to search. This tool turns a vague memory into clues and shows why each title matches.",
+    },
+    flow: [
+      { ko: "장면 진술 + 힌트 카드", en: "Scene description + hint cards" },
+      { ko: "판별 API (gpt-4.1-mini)", en: "Detection API (gpt-4.1-mini)" },
+      { ko: "후보 작품과 근거", en: "Candidate titles with reasons" },
+      { ko: "비슷한 작품 추천 · 공유 링크", en: "Similar titles · share link" },
+    ],
+    facts: [
+      { value: "4", label: { ko: "배포한 버전", en: "versions shipped" }, source: { ko: "1.0 → 1.3", en: "1.0 → 1.3" } },
+      { value: "6", label: { ko: "힌트 카드 항목", en: "hint-card fields" }, source: { ko: "시기·주인공·배경·장면·분위기·그림체", en: "when · hero · setting · scene · mood · style" } },
+      { value: "0", label: { ko: "서버에 남는 입력", en: "inputs stored on the server" }, source: { ko: "기록은 사용자 브라우저에만", en: "history stays in the browser" } },
+    ],
+    featuredTech: ["Apps Script", "JavaScript", "OpenAI API"],
+    image: { src: "/projects/memory-detective.webp", alt: { ko: "기억 탐정 사건 접수서 화면: 기억나는 장면과 힌트 카드 입력", en: "Memory Detective case form: scene description and hint cards" }, width: 910, height: 568 },
   },
   {
     // 이 이력서 사이트 자체. 공개하려면 visible을 true로 바꾸세요.

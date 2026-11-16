@@ -23,8 +23,8 @@ export const resume: Resume = {
     phone: "+82-10-2724-6130",
     location: { ko: "대한민국", en: "South Korea" },
     links: [
-      // GitHub, LinkedIn, 블로그 주소가 있으면 추가하세요.
-      // { label: "GitHub", url: "https://github.com/..." },
+      { label: "GitHub", url: "https://github.com/songsh2066-sh" },
+      // LinkedIn, 블로그 주소가 있으면 같은 형식으로 추가하세요.
     ],
     availability: { ko: "즉시 근무 가능", en: "Available immediately" },
     contactVisibility: { email: true, phone: true, location: true },
@@ -32,10 +32,11 @@ export const resume: Resume = {
   },
 
   skills: [
-    // 실제로 사용해 본 기술만 남기고 나머지는 지우세요. level은 선택입니다.
-    { category: { ko: "프로그래밍 언어", en: "Languages" }, items: ["Python", "SQL", "TypeScript"] },
-    { category: { ko: "AI · 데이터", en: "AI · Data" }, items: ["LLM Agent", "pandas", "scikit-learn"] },
-    { category: { ko: "웹 · 배포", en: "Web · Deployment" }, items: ["Next.js", "Git", "Vercel"] },
+    // 프로젝트(ERLink, 서울 메이트, 기억 탐정)에서 실제로 사용한 기술만 적었습니다.
+    { category: { ko: "AI · 에이전트", en: "AI · Agents" }, items: ["LangGraph", "Tool calling", "Claude API", "OpenAI API", "RAG (pgvector · BM25 · RRF)"] },
+    { category: { ko: "백엔드 · 데이터", en: "Backend · Data" }, items: ["Python", "FastAPI (SSE)", "PostgreSQL · PostGIS", "Redis"] },
+    { category: { ko: "웹 · 배포", en: "Web · Deployment" }, items: ["Next.js", "Google Apps Script", "Docker Compose", "GitHub Actions CI", "Vercel"] },
+    { category: { ko: "테스트", en: "Testing" }, items: ["pytest", "Playwright", "ruff"] },
   ],
 
   experience: [
@@ -60,8 +61,9 @@ export const resume: Resume = {
     {
       school: { ko: "청년취업사관학교", en: "Youth Employment Academy (Seoul)" },
       degree: { ko: "AI Agent 개발 과정", en: "AI Agent Development Program" },
-      period: "2026 – 현재", // 입력 필요: 정확한 기간
+      period: "2026.09 – 2027.02",
       notes: [
+        { ko: "2026.09.30 – 2027.02.12 (수료 예정) · 주 5일(월~금) 13:00–17:00", en: "Sep 30, 2026 – Feb 12, 2027 (expected) · Mon–Fri, 13:00–17:00" },
         { ko: "LLM 기반 에이전트 설계·구현 실습, 프로젝트 기반 학습", en: "Hands-on LLM agent design and implementation, project-based learning" },
       ],
     },
@@ -73,7 +75,7 @@ export const resume: Resume = {
     {
       name: { ko: "정보처리기사", en: "Engineer Information Processing" },
       issuer: { ko: "한국산업인력공단", en: "Human Resources Development Service of Korea" },
-      date: "", // 입력 필요: 예 "2024.11"
+      date: "2025.06",
     },
   ],
 

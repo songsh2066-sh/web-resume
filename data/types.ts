@@ -53,6 +53,24 @@ export interface Education {
   notes?: Localized[];
 }
 
+// 측정한 변화 (전 → 후). 웹 프로필에서 막대로 그려집니다.
+export interface Delta {
+  label: Localized;
+  before: number;
+  after: number;
+  unit?: string; // "%", "분" 등. 표시용
+  better: "up" | "down"; // 커질수록 좋은지, 작아질수록 좋은지
+  max: number; // 막대 길이 기준(전체 눈금)
+  source: Localized; // 이 숫자를 어디서 쟀는지
+}
+
+// 확인한 사실 (큰 숫자 + 설명)
+export interface Fact {
+  value: string;
+  label: Localized;
+  source?: Localized;
+}
+
 export interface Project {
   id: string; // 고유 ID (예: "p001")
   name: Localized;
@@ -63,6 +81,19 @@ export interface Project {
   results: Localized[];
   links?: Link[];
   visible?: boolean; // false면 공개 페이지에서 숨김
+
+  // ── 웹 프로필 화면용 (없으면 문서형 이력서에만 나옵니다) ──
+  slug?: string; // 상세 패널 주소용 (예: /ko#erlink)
+  title?: Localized; // 카드 제목 (짧은 이름)
+  status?: "building" | "live";
+  summary?: Localized; // 카드 한 줄 설명
+  problem?: Localized; // 왜 만들었나
+  flow?: Localized[]; // 구조 (단계 순서)
+  deltas?: Delta[];
+  facts?: Fact[];
+  featuredTech?: string[]; // 카드에 보일 대표 기술 4~5개
+  image?: { src: string; alt: Localized; width: number; height: number };
+  privateRepo?: boolean;
 }
 
 export interface Certificate {

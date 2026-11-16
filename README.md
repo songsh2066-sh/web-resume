@@ -6,20 +6,43 @@
 
 Next.js(App Router)로 만든 공개 이력서 사이트입니다. `/ko`, `/en` 두 언어로 제공되며, 데이터 파일만 고치면 페이지가 바뀝니다. PRD v2.0의 공개 페이지 요구사항(P-01~P-06, P-09) 중 정적 사이트로 가능한 범위를 구현했습니다. 관리자 콘솔·경력 원장·AI 생성은 Supabase 연결 후 다음 단계에서 올립니다.
 
+## 화면 구성 (2026-11-16 개편)
+
+| 주소 | 화면 | 용도 |
+| --- | --- | --- |
+| `/ko`, `/en` | 웹 프로필 | 훑어보기용. 한 줄 정체성, 검증 기록, 핵심 수치, 작업 방식, 프로젝트 카드(누르면 상세 패널), 교육·자격, 연락 |
+| `/ko/resume`, `/en/resume` | 문서형 이력서 | PDF 저장·인쇄·채용 사이트 제출용. 상단 "PDF 저장" 버튼 |
+| `/ko#erlink` 처럼 | 프로젝트 상세 바로 열기 | 특정 프로젝트만 공유할 때 (slug: `erlink`, `seoulmate`, `memory-detective`) |
+
+디자인 콘셉트는 "근거 노트"입니다. 핵심 문장과 숫자는 형광펜으로 표시하고, 모든 숫자 옆에 출처(어느 프로젝트의 어떤 기록인지)를 붙입니다. 밝게/어둡게 전환을 지원하고, 글꼴(Pretendard, JetBrains Mono)은 사이트 안에 포함되어 외부 서버 없이 불러옵니다.
+
 ## 폴더 구조
 
 ```
-app/[locale]/layout.tsx   언어별 레이아웃, 메타 태그·hreflang·OG (SEO)
-app/[locale]/page.tsx     이력서 페이지
-app/globals.css           디자인 토큰(색·폰트), 인쇄(PDF) CSS
-app/sitemap.ts, robots.ts 검색엔진용 sitemap / robots
-components/ResumeView.tsx 이력서 렌더링 (번역 폴백 포함)
-components/TopBar.tsx     언어 전환 + PDF 저장 버튼
-data/resume.ts            ★ 이력서 본문 데이터 (여기만 고치면 됨)
-data/projects.ts          ★ 프로젝트 목록 (과정 중 하나씩 추가)
-data/types.ts             데이터 타입 정의
-data/ui.ts                화면 문구(한/영)
+app/[locale]/layout.tsx         언어별 레이아웃, 글꼴, 메타 태그·hreflang·OG (SEO), 테마 초기화
+app/[locale]/page.tsx           웹 프로필 화면
+app/[locale]/resume/page.tsx    문서형 이력서 화면 (PDF)
+app/globals.css                 디자인 토큰(색·글꼴), 화면 스타일, 인쇄(PDF) CSS
+app/sitemap.ts, robots.ts       검색엔진용 sitemap / robots
+components/profile/Projects.tsx 프로젝트 카드 + 상세 패널
+components/profile/DeltaBar.tsx 측정한 변화(전 → 후) 막대
+components/profile/Flow.tsx     프로젝트 구조 단계도
+components/ResumeView.tsx       문서형 이력서 렌더링 (번역 폴백 포함)
+components/TopBar.tsx           상단 바 (섹션 이동, 언어, 테마, PDF)
+data/resume.ts                  ★ 이력서 본문 데이터
+data/projects.ts                ★ 프로젝트 목록 (카드·상세 패널 내용 포함)
+data/profile.ts                 ★ 웹 프로필 문구 (한 줄 정체성, 검증 기록, 핵심 수치, 작업 방식)
+data/types.ts                   데이터 타입 정의
+data/ui.ts                      화면 문구(한/영)
+public/projects/                프로젝트 화면 캡처 이미지
 ```
+
+## 웹 프로필 문구·수치 바꾸기
+
+- 한 줄 정체성, 소개, 검증 기록, 핵심 수치, 작업 방식: `data/profile.ts`
+- 프로젝트 카드의 한 줄 설명(`summary`), 왜 만들었나(`problem`), 구조(`flow`), 측정한 변화(`deltas`: 전·후·눈금·출처), 확인한 것(`facts`), 대표 기술(`featuredTech`), 캡처(`image`): `data/projects.ts`
+- 프로젝트 캡처는 `public/projects/` 에 넣고 `image.src`에 `/projects/파일이름.webp`처럼 적습니다. 캡처가 없으면 구조도(`flow`)가 대신 보입니다.
+- 숫자를 바꿀 때는 꼭 출처(`source`)도 함께 고칩니다. "근거 노트" 콘셉트의 핵심입니다.
 
 ## 1. 내 정보 수정하기
 
